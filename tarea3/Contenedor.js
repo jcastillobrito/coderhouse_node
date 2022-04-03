@@ -62,20 +62,19 @@ class Contenedor {
     getById(id_search = 0)
     {
         this.getDataText()   
-
         let indice  = null
-        let nodo    = this.productos.forEach((item,index,arr)=>{
-                
-                    if(item.id == id_search)
-                            indice = index
-                    else
-                        return null
-            })
 
-        if(indice)
-            return this.productos[indice];
-        else 
-            null
+        for (let index = 0; index < this.productos.length; index++) 
+        {
+            if(this.productos[index].id == id_search)    
+                {
+                    indice = index
+                    break;
+                }
+        }
+
+        return this.productos[indice]
+        
     }
 
     deleteById(id_search = 0)
@@ -104,6 +103,20 @@ class Contenedor {
     {
         this.getDataText() // traigo la data almacenada en el archivo en caso de existir
         return this.productos
+
+    }
+
+    arrayIds()
+    {
+
+        this.getDataText()
+        let array = this.productos;
+        let indices = []
+
+        this.productos.forEach((item,index,arr)=>{
+            indices.push(item.id)
+        })
+        return indices
     }
 
 }
