@@ -25,13 +25,20 @@ router.get('/:id',(req,res)=>{
 })
 
 //crear nuevo producto
-router.post('/:version',(req,res)=>{
+router.post('/',(req,res)=>{
 
-    console.log(req.body)
-    console.log(req.params)
-    console.log(req.query)
-    res.send(req.body)
+    res.send(logic.store(req.body))
     //res.send(logic.store(req.params))
+})
+
+router.put('/',(req,res)=>{
+
+    res.send(logic.update(req.body))
+})
+
+router.delete('/:id',(req,res)=>{
+
+    res.send(logic.deleteById(req.params.id))
 })
 
 app.use('/api/productos',router)
