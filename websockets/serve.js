@@ -20,6 +20,12 @@ io.on('connection',(socket)=>{
     socket.on('notificacion',(info)=>{
         console.log(info)
     })
+
+    socket.on('mensaje',(info)=>{
+    io.sockets.emit('mi mensaje',info)
+
+
+    })
 })
 
 
