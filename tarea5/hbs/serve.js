@@ -14,10 +14,10 @@ const LogicaImport = require('./LogicaApi.js')
 let logic = new  LogicaImport(); 
 
 
-router.get('/form',(req,res)=>{
+app.get('/',(req,res)=>{
 
     res.render("home",{
-        ruta      : '/api/productos//',
+        ruta      : '/productos/',
         nm_button : 'Listado Productos',
     })
 })
@@ -28,23 +28,18 @@ app.post('/',(req,res)=>{
 
     let productos =logic.store(req.body)
     res.render("confirm",{
-    ruta                : '/api/productos/',
+    ruta                : '/productos/',
     nm_button           : 'Ver Productos'})
 })
 
-router.get('/',(req,res)=>{
+app.get('/productos',(req,res)=>{
 
     let productos = logic.getProductos()
     res.render("productos",{array_productos     : productos,
-                            ruta                : '/api/productos/form',
+                            ruta                : '/',
                             nm_button           : 'Ingresar Nuevo producto',})
 })
 
 
-app.use('/api/productos',router)
-
-
-
-
-
+app.use('/productos',router)
 app.listen(8080)

@@ -1,0 +1,26 @@
+{
+  "name": "coderhouse",
+  "version": "1.0.0",
+  "description": "coderhouse",
+  "main": "serve.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon --watch src app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/juankmullen/coderhouse_node.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/juankmullen/coderhouse_node/issues"
+  },
+  "homepage": "https://github.com/juankmullen/coderhouse_node#readme",
+  "dependencies": {
+    "express": "^4.17.3",
+    "hbs": "^4.2.0",
+    "nodemon": "^2.0.15",
+    "pug": "^3.0.2"
+  }
+}
