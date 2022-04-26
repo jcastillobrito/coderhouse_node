@@ -4,7 +4,10 @@
   "description": "coderhouse",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "\\node_modules\\.bin\\tsc",
+    "watch": "\\node_modules\\.bin\\tsc -w",
+    "start" : "nodemon ./dist/index.js"
   },
   "repository": {
     "type": "git",
