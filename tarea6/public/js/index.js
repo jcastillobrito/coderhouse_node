@@ -1,6 +1,19 @@
-
 const socket = io()
 
+function submitChat(event) 
+{
+    
+    event.preventDefault();
+
+    let email       = document.getElementById("email");
+    let msj         = document.getElementById("mensaje");
+    let hora        = moment().format("DD/MM/YYYY HH:mm:ss");
+    let nodo = [{'email':email.value,'msj':msj.value,'created_at':hora}]
+
+    socket.emit('chat',nodo)
+
+
+}
 function submitForm(event)
     {
         event.preventDefault();
@@ -20,7 +33,10 @@ function submitForm(event)
         
         data.forEach((element,index) => 
             {
-                const item= '<tr> <td>'+element.title+'</td> <td>'+element.price+'</td> <td>'+element.thumbnail+'</td> </tr>';
+                const item= `<tr> <td>${element.title}</td> <td>${element.price}</td> 
+                    <td style="max-width:100px">
+                        <img style="max-width:100px; !important" src="${element.thumbnail}">
+                    </td> </tr>`;
 
                 if(index ==0)
                      $('#table-body').html(item);
@@ -28,8 +44,25 @@ function submitForm(event)
                 $('#table-body tr:last').after(item);
 
             });
-        
+    })
 
+    socket.on('chat_a_cliente', (data)=>{
+
+        
+        $('#lista_chat').html("");
+        
+       
+        data.forEach((element,index) => 
+            {
+                let item= `<li><span style="color:blue;font-weight:700">${element.email}</span> <span>[${element.created_at}]</span> 
+                            <span style="color:green;font-style:italic">${element.msj}</span></li>`;
+
+                if(index ==0)
+                     $('#lista_chat').html(item);
+                else
+                    $('#lista_chat li:last').after(item);
+
+            });
     })
 
 /*

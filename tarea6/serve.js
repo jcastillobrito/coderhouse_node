@@ -1,12 +1,11 @@
-import express from 'express'
-import pug from 'pug'
+const express = require('express')
+const pug = require('pug')
 
-import LogicaImport from './public/js/LogicaApi.js';
+let LogicaApi = require('./LogicaApi.js')
+let HandleFiles = require('./HandleFiles.js')
 
-import { Server as HttpServer } from 'http'
-import { Server as IOServer } from 'socket.io'
-
-
+let { Server : HttpServer }   = require('http')
+let { Server : IOServer }   = require('socket.io')
 
 
 const app = express()
@@ -16,7 +15,8 @@ app.use(express.static('public'))
 const httpServer = new HttpServer(app)
 const io = new IOServer(httpServer)
 
-const logic = new  LogicaImport(); 
+let logic   = new  LogicaApi(); 
+let file    = new  HandleFiles(); 
 
 app.post('/',(req,res)=>{
 
@@ -33,15 +33,20 @@ app.get('/',(req,res)=>{
 
 io.on('connection',(socket)=>{
     socket.emit('mi mensaje',logic.getProductos())
+    socket.emit('chat_a_cliente',file.getAll())
 
     socket.on('notificacion',(nodo)=>
     {
         logic.store(nodo)
         io.sockets.emit('mi mensaje',logic.getProductos())
-
     })
 
-
+    socket.on('chat',(nodo)=>
+    {
+        console.log(nodo)
+        file.save(nodo)
+        io.sockets.emit('chat_a_cliente',file.getAll())
+    })
 
 })
 

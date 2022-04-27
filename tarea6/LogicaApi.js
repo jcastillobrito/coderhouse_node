@@ -1,4 +1,4 @@
-export default class LogicaApi
+class LogicaApi
 {
 
         constructor()
@@ -82,3 +82,5 @@ export default class LogicaApi
             return this.productos
         }
 }
+
+module.exports = LogicaApi
